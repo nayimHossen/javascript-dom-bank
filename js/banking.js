@@ -6,6 +6,7 @@ function getInputValue(fieldId) {
     return inputValue;
 };
 
+
 //update value function
 function updateTotal(fieldId, amount) {
     const deposit = document.getElementById(fieldId);
@@ -34,6 +35,18 @@ function getInnerTextValue(fieldId) {
     return value;
 }
 
+//custom alert Massage
+function alertMassage(message) {
+    document.getElementById("custom-alert").style.display = 'block';
+    const para = document.createElement("p");
+    para.innerHTML = message;
+    document.getElementById("error-message").appendChild(para);
+}
+
+function ClickToClose() {
+    document.getElementById("custom-alert").style.display = 'none';
+}
+
 //deposit button event handler
 document.getElementById('deposit-button').addEventListener('click', function () {
     const amount = getInputValue('deposit-input');
@@ -43,7 +56,7 @@ document.getElementById('deposit-button').addEventListener('click', function () 
         updateBalance(amount, true);
     }
     else {
-        alert("pleas give a positive number")
+        alertMassage("You con't give string or negative number.");
     }
 });
 
@@ -57,6 +70,6 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
         updateBalance(amount, false);
     }
     else {
-        alert("pleas give a positive number")
+        alertMassage("You con't give string or negative number.");
     }
 });
