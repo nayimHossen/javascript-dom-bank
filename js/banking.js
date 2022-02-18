@@ -28,16 +28,35 @@ function updateBalance(amount, isAdding) {
     balance.innerText = newBalance;
 };
 
+function getInnerTextValue(fieldId) {
+    const fieldTag = document.getElementById(fieldId);
+    const value = parseFloat(fieldTag.innerText);
+    return value;
+}
+
 //deposit button event handler
 document.getElementById('deposit-button').addEventListener('click', function () {
     const amount = getInputValue('deposit-input');
-    updateTotal("deposit-total", amount);
-    updateBalance(amount, true);
+    //error handle
+    if (amount > 0) {
+        updateTotal("deposit-total", amount);
+        updateBalance(amount, true);
+    }
+    else {
+        alert("pleas give a positive number")
+    }
 });
 
 //withdraw button event handler
 document.getElementById('withdraw-button').addEventListener('click', function () {
     const amount = getInputValue("withdraw-input");
-    updateTotal('withdraw-total', amount)
-    updateBalance(amount, false);
+    const balance = getInnerTextValue('balance-total');
+    //error handle
+    if (amount > 0 && amount <= balance) {
+        updateTotal('withdraw-total', amount)
+        updateBalance(amount, false);
+    }
+    else {
+        alert("pleas give a positive number")
+    }
 });
